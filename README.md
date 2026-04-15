@@ -11,7 +11,7 @@ This project is for **educational purposes only**. It is free to use, modify, an
 ## Features
 
 - Auto Party Quest with queue timeout handling
-- Quest selection (Sleepywood, Ludibrium, Zakum, Orbis)
+- Quest selection (Sleepywood, Ludibrium, Orbis, Event Quest: In Search of the Dragon Emperor's Helm!)
 - Auto recovery from stuck states and connection loss
 - Random jump actions during PQ
 - GUI and CLI modes
@@ -35,22 +35,25 @@ pip install -r requirements.txt
 ## Quick Start
 
 1. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 2. Create templates (first time only):
+
 ```bash
 python tools/template_creator.py --port 5555
 ```
 
 3. Run the bot:
+
 ```bash
 # GUI mode
 python main.py
 
 # CLI mode
-python main.py --cli --port 5555 --quest sleepywood   # or ludibrium, zakum, orbis
+python main.py --cli --port 5555 --quest sleepywood   # or ludibrium, orbis
 ```
 
 ## Project Structure
@@ -72,6 +75,7 @@ maple_bot/
 ## Configuration
 
 Copy the example config and edit:
+
 ```bash
 cp config/settings.yaml.example config/settings.yaml
 ```
@@ -80,7 +84,7 @@ Edit `config/settings.yaml`:
 
 ```yaml
 loglevel: info
-max-log-files: 5   # Keep only this many recent log files (0 = keep all)
+max-log-files: 5 # Keep only this many recent log files (0 = keep all)
 
 adb:
   host: "127.0.0.1"
@@ -88,7 +92,7 @@ adb:
 
 bot-option:
   queue-timeout: 30
-  quest-choice: sleepywood   # sleepywood | ludibrium | zakum | orbis
+  quest-choice: sleepywood # sleepywood | ludibrium | orbis | dong
   random-jump: true
 ```
 

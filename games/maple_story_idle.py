@@ -44,6 +44,7 @@ class MapleStoryIdleBot:
     - sleepywood_wave_1, sleepywood_wave_2, sleepywood_wave_3: In PQ (Sleepywood waves)
     - ludibrium_wave_11, ludibrium_wave_22, ludibrium_wave_33: In PQ (Ludibrium waves)
     - orbis_wave_1, orbis_wave_2, orbis_wave_3: In PQ (Orbis waves)
+    - dong_wave_1, dong_wave2, dong_wave3: In PQ (Dong waves)
     - clear: PQ complete indicator (triggers PQ finish)
     - failed: PQ failed mid-run indicator (triggers recovery)
     - red_alert: Boss red attack indicator (wave 3 only) - triggers immediate double-jump
@@ -535,6 +536,13 @@ class MapleStoryIdleBot:
                 return 2
             if self.matcher.find(screen, "sleepywood_wave_1"):
                 return 1
+        elif self.quest_choice == "dong":
+            if self.matcher.find(screen, "dong_wave_3"):
+                return 3
+            if self.matcher.find(screen, "dong_wave_2"):
+                return 2
+            if self.matcher.find(screen, "dong_wave_1"):
+                return 1
         return 0
     
     def _get_queue_template(self) -> str:
@@ -713,8 +721,15 @@ class MapleStoryIdleBot:
             time.sleep(1)
             return
         
+        # Dong PQ button - click it (also at main screen)
+        if self.quest_choice == "dong" and self._check_and_click(screen, "dong_pq_button"):
+            self._log("Opening Dong PQ button")
+            self._activity()
+            time.sleep(1)
+            return
+        
         # Main menu button - open menu
-        if self._check_and_click(screen, "main_menu"):
+        if not self.quest_choice == "dong" and self._check_and_click(screen, "main_menu"):
             self._log("Opening main menu")
             self._activity()  # Button click is progress
             time.sleep(2.5)  # Wait for menu animation (game can be laggy)
